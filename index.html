@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Anuj ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  margin: 0;
+  background: black;
+  color: white;
+  font-family: Georgia, serif;
+  overflow: hidden;
+}
+
+.slide {
+  display: none;
+  height: 100vh;
+  padding: 40px 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.slide.active {
+  display: flex;
+}
+
+button {
+  margin-top: 30px;
+  padding: 12px 28px;
+  font-size: 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.red { background:#7a0000; }
+.final { background:#ffd6dc; color:black; }
+</style>
+</head>
+
+<body>
+
+<div class="slide active">
+  <h1>Anuj Sunar</h1>
+  <p>Some feelings grow quietly…<br>and then become impossible to ignore.</p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="slide">
+  <h1>515 Days</h1>
+  <p>Of conversations, patience, laughter, and choosing each other.</p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="slide red">
+  <h1>Be My Valentine ❤️</h1>
+  <button onclick="next()">YES</button>
+</div>
+
+<div class="slide final">
+  <h1>You chose me ❤️</h1>
+  <p>This is just the beginning.</p>
+</div>
+
+<script>
+let i = 0;
+const slides = document.querySelectorAll(".slide");
+
+function next() {
+  slides[i].classList.remove("active");
+  i++;
+  if (i < slides.length) slides[i].classList.add("active");
+}
+</script>
+
+</body>
+</html>
