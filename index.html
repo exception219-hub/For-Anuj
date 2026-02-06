@@ -8,10 +8,24 @@
 <style>
 body {
   margin: 0;
-  background: black;
-  color: white;
+  background: radial-gradient(circle at top, #1a0008, #000);
+  color: #fff;
   font-family: "Georgia", serif;
   overflow: hidden;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  color: rgba(255,182,193,0.8);
+  font-size: 18px;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
 }
 
 .slide {
@@ -22,106 +36,167 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
+  z-index: 2;
 }
 
 .slide.active { display: flex; }
 
-h1 { font-size: 2.4em; margin-bottom: 10px; }
-p  { font-size: 1.25em; line-height: 1.6; max-width: 700px; }
+h1 { font-size: 2.5em; margin-bottom: 15px; }
+p  { font-size: 1.25em; line-height: 1.7; max-width: 720px; }
 
 button {
   margin-top: 30px;
-  padding: 14px 36px;
+  padding: 14px 40px;
   font-size: 18px;
-  border-radius: 30px;
+  border-radius: 40px;
   border: none;
   cursor: pointer;
+  background: #ffd6dc;
+  color: #4a0000;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
-.red   { background:#7a0000; }
-.soft  { background:#1a1a1a; }
-.final { background:#ffd6dc; color:black; }
+.buttons {
+  display: flex;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+#noBtn {
+  background: #444;
+  color: #fff;
+  position: relative;
+}
+
+.final {
+  background: linear-gradient(to bottom, #ffd6dc, #fff);
+  color: #000;
+}
+.signature {
+  margin-top: 40px;
+  font-style: italic;
+  font-size: 1.1em;
+}
 </style>
 </head>
 
 <body>
 
-<div class="slide active soft">
+<!-- Background music -->
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="slide active">
   <h1>Anuj Sunar</h1>
   <p>
-    This isn’t a normal website.<br>
-    It’s something I’ve been carrying in my heart<br>
-    for a very long time.
+    This isn’t a website you scroll through.<br>
+    It’s something I felt before I ever wrote it.<br><br>
+    Please read it slowly.
   </p>
-  <button onclick="next()">Next</button>
+  <button onclick="next()">Continue</button>
 </div>
 
-<div class="slide soft">
-  <h1>Slow Beginnings</h1>
+<div class="slide">
+  <h1>It Started Quietly</h1>
   <p>
-    We didn’t rush.<br>
-    We didn’t force anything.<br><br>
-    We let time do its thing.
+    No dramatic moment.<br>
+    No sudden realization.<br><br>
+    Just small conversations that stayed with me.
   </p>
-  <button onclick="next()">Next</button>
+  <button onclick="next()">Continue</button>
 </div>
 
-<div class="slide soft">
+<div class="slide">
   <h1>515 Days</h1>
   <p>
-    515 days of conversations.<br>
-    515 days of choosing each other.<br><br>
-    Not perfect days — real ones.
+    515 days of choosing you.<br>
+    Through conversations, patience,<br>
+    and understanding.
   </p>
-  <button onclick="next()">Next</button>
+  <button onclick="next()">Continue</button>
 </div>
 
-<div class="slide soft">
-  <h1>Why You</h1>
+<div class="slide">
+  <h1>You Feel Like Home</h1>
   <p>
-    You stayed when things were messy.<br>
-    You listened when I struggled to speak.<br><br>
-    You became my safe place.
+    Not the loud kind.<br>
+    The safe kind.<br><br>
+    Where I don’t have to explain<br>
+    who I am.
   </p>
-  <button onclick="next()">Next</button>
+  <button onclick="next()">Continue</button>
 </div>
 
-<div class="slide red">
-  <h1>Anuj</h1>
+<div class="slide">
+  <h1>So Here I Am</h1>
   <p>
-    I don’t want “almost”.<br>
-    I don’t want “maybe”.<br><br>
-    I want <strong>us</strong>.
+    With no perfect words.<br>
+    No rehearsed lines.<br><br>
+    Just a heart that knows<br>
+    who it wants.
   </p>
-  <button onclick="next()">Next</button>
+  <button onclick="next()">Continue</button>
 </div>
 
-<div class="slide red">
-  <h1>So here I am…</h1>
-  <p>
-    With no filters.<br>
-    No pretending.<br><br>
-    Just my heart.
-  </p>
-  <button onclick="next()">Next</button>
-</div>
-
-<div class="slide final">
+<!-- Proposal slide -->
+<div class="slide">
   <h1>Be My Valentine ❤️</h1>
   <p>
     Not just today.<br>
-    But every day that follows.
+    But for all the ordinary days<br>
+    I want to spend with you.
   </p>
+
+  <div class="buttons">
+    <button onclick="next()">YES ❤️</button>
+    <button id="noBtn" onmouseover="moveNo()">NO 🙈</button>
+  </div>
+</div>
+
+<!-- Final slide -->
+<div class="slide final">
+  <h1>You chose me ❤️</h1>
+  <p>
+    And I promise to choose you<br>
+    in all the little moments that matter.
+  </p>
+
+  <div class="signature">
+    — With all my love,<br>
+    <strong>[Olimpika]</strong>
+  </div>
 </div>
 
 <script>
 let i = 0;
 const slides = document.querySelectorAll(".slide");
+const music = document.getElementById("bgMusic");
+
 function next() {
+  if (music.paused) music.play();
   slides[i].classList.remove("active");
   i++;
   if (i < slides.length) slides[i].classList.add("active");
 }
+
+function moveNo() {
+  const btn = document.getElementById("noBtn");
+  btn.style.left = Math.random() * 120 - 60 + "px";
+  btn.style.top  = Math.random() * 80 - 40 + "px";
+}
+
+/* Floating hearts */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 12000);
+}, 700);
 </script>
 
 </body>
