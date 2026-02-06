@@ -10,66 +10,113 @@ body {
   margin: 0;
   background: black;
   color: white;
-  font-family: Georgia, serif;
+  font-family: "Georgia", serif;
   overflow: hidden;
 }
 
 .slide {
   display: none;
   height: 100vh;
-  padding: 40px 20px;
+  padding: 40px 25px;
   text-align: center;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.slide.active {
-  display: flex;
-}
+.slide.active { display: flex; }
+
+h1 { font-size: 2.4em; margin-bottom: 10px; }
+p  { font-size: 1.25em; line-height: 1.6; max-width: 700px; }
 
 button {
   margin-top: 30px;
-  padding: 12px 28px;
+  padding: 14px 36px;
   font-size: 18px;
-  border-radius: 25px;
+  border-radius: 30px;
   border: none;
   cursor: pointer;
 }
 
-.red { background:#7a0000; }
+.red   { background:#7a0000; }
+.soft  { background:#1a1a1a; }
 .final { background:#ffd6dc; color:black; }
 </style>
 </head>
 
 <body>
 
-<div class="slide active">
+<div class="slide active soft">
   <h1>Anuj Sunar</h1>
-  <p>Some feelings grow quietly…<br>and then become impossible to ignore.</p>
+  <p>
+    This isn’t a normal website.<br>
+    It’s something I’ve been carrying in my heart<br>
+    for a very long time.
+  </p>
   <button onclick="next()">Next</button>
 </div>
 
-<div class="slide">
+<div class="slide soft">
+  <h1>Slow Beginnings</h1>
+  <p>
+    We didn’t rush.<br>
+    We didn’t force anything.<br><br>
+    We let time do its thing.
+  </p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="slide soft">
   <h1>515 Days</h1>
-  <p>Of conversations, patience, laughter, and choosing each other.</p>
+  <p>
+    515 days of conversations.<br>
+    515 days of choosing each other.<br><br>
+    Not perfect days — real ones.
+  </p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="slide soft">
+  <h1>Why You</h1>
+  <p>
+    You stayed when things were messy.<br>
+    You listened when I struggled to speak.<br><br>
+    You became my safe place.
+  </p>
   <button onclick="next()">Next</button>
 </div>
 
 <div class="slide red">
-  <h1>Be My Valentine ❤️</h1>
-  <button onclick="next()">YES</button>
+  <h1>Anuj</h1>
+  <p>
+    I don’t want “almost”.<br>
+    I don’t want “maybe”.<br><br>
+    I want <strong>us</strong>.
+  </p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="slide red">
+  <h1>So here I am…</h1>
+  <p>
+    With no filters.<br>
+    No pretending.<br><br>
+    Just my heart.
+  </p>
+  <button onclick="next()">Next</button>
 </div>
 
 <div class="slide final">
-  <h1>You chose me ❤️</h1>
-  <p>This is just the beginning.</p>
+  <h1>Be My Valentine ❤️</h1>
+  <p>
+    Not just today.<br>
+    But every day that follows.
+  </p>
 </div>
 
 <script>
 let i = 0;
 const slides = document.querySelectorAll(".slide");
-
 function next() {
   slides[i].classList.remove("active");
   i++;
